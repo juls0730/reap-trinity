@@ -460,7 +460,7 @@ class AfmoeDecoderLayer(GradientCheckpointingLayer):
         hidden_states = self.pre_mlp_layernorm(hidden_states)
 
         if self.moe_enabled:
-            hidden_states = self.mlp(hidden_states)
+            hidden_states, _ = self.mlp(hidden_states)
         else:
             hidden_states = self.mlp(hidden_states)
 
