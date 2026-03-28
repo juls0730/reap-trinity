@@ -115,6 +115,17 @@ MODEL_ATTRS = {
         "num_experts": "n_routed_experts",
         "num_experts_per_tok": "num_experts_per_tok",
     },
+    "AfmoeForCausalLM": {
+        "moe_block": "mlp",
+        "gate_proj": "gate_proj",
+        "up_proj": "up_proj",
+        "down_proj": "down_proj",
+        "experts": "experts",
+        "fused": False,
+        "router": "gate",
+        "num_experts": "num_experts",
+        "num_experts_per_tok": "num_experts_per_tok",
+    },
 }
 
 
@@ -193,6 +204,10 @@ def patched_model_map(model: str):
     if model == "Qwen/Qwen3-Coder-480B-A35B-Instruct-FP8":
         patched = True
         model_name = "artifacts/models/Qwen3-Coder-480B-A35B-Instruct-FP8"
+
+    if model == "arcee-ai/Trinity-Mini":
+        patched = True
+        model_name = "artifacts/models/Trinity-Mini"
 
     if patched:
         logger.info(f"Using patched model for {model} from: {model_name}")

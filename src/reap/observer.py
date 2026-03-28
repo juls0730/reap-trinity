@@ -663,6 +663,16 @@ class Glm44MoEObserverHookConfig(MoETransformerObserverConfig):
     fused_experts: bool = False
 
 
+@dataclass
+class AfmoeObserverHookConfig(MoETransformerObserverConfig):
+    # Use the 'MoE Block Class' name you found in step 1 here:
+    module_class_name_to_hook_regex: Optional[str] = "AfmoeMoE"
+    
+    # These depend on the config.json of Trinity Mini
+    num_experts_attr_name: str = "config.num_experts"
+    top_k_attr_name: str = "config.num_experts_per_tok"
+    fused_experts: bool = False
+
 OBSERVER_CONFIG_REGISTRY = {
     "Qwen3MoeForCausalLM": Qwen3MoEObserverHookConfig,
     "NonUniformQwen3MoeForCausalLM": Qwen3MoEObserverHookConfig,
@@ -672,4 +682,5 @@ OBSERVER_CONFIG_REGISTRY = {
     "Ernie4_5_MoEForCausalLM": Ernie4_5MoEObserverHookConfig,
     "Ernie4_5_MoeForCausalLM": Ernie4_5MoEObserverHookConfig,
     "Glm4MoeForCausalLM": Glm44MoEObserverHookConfig,
+    "AfmoeForCausalLM": AfmoeObserverHookConfig,
 }
